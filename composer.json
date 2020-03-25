@@ -1,5 +1,5 @@
 {
-    "name": "leosarli/disarli-ulid-php",
+    "name": "leodisarli/disarli-ulid-php",
     "description": "PHP Universally Unique Lexicographically Sortable Identifier (ULID)",
     "version": "1.0.0",
     "type": "library",
