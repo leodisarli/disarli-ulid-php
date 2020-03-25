@@ -37,6 +37,18 @@ class Ulid
         );
     }
 
+    public function getDateFromUlid(
+        string $ulid
+    ): string {
+        $timeStamp = $this->getTimeFromUlid(
+            $ulid
+        );
+        return date(
+            'Y-m-d H:i:s',
+            $timeStamp
+        );
+    }
+
     public function getRandomnessFromString(
         string $ulid
     ): string {
@@ -135,6 +147,11 @@ class Ulid
             throw new Exception('Invalid ULID string. Timestamp too large');
         }
 
-        return $carry;
+        $carry = substr(
+            $carry,
+            0,
+            UlidConstants::TIME_LENGTH
+        );
+        return (int) $carry;
     }
 }

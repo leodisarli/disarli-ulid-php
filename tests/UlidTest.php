@@ -31,7 +31,7 @@ class UlidTest extends TestCase
     public function testIsInvalidFormat()
     {
         $ulid = new Ulid();
-        $result = $ulid->isValidFormat('1585083964945');
+        $result = $ulid->isValidFormat('1585083964');
         $this->assertFalse($result);
     }
 
@@ -42,7 +42,7 @@ class UlidTest extends TestCase
     {
         $ulid = new Ulid();
         $result = $ulid->getTimeFromUlid('01E475VQGHNW990PVHXFDT4C6W');
-        $this->assertEquals('1585083964945', $result);
+        $this->assertEquals('1585083964', $result);
     }
 
     /**
@@ -53,7 +53,28 @@ class UlidTest extends TestCase
         $ulid = new Ulid();
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid format ULID string.');
-        $ulid->getTimeFromUlid('1585083964945');
+        $ulid->getTimeFromUlid('1585083964');
+    }
+
+    /**
+     * @covers Ulid\Ulid::getDateFromUlid
+     */
+    public function testGetDateFromUlid()
+    {
+        $ulid = new Ulid();
+        $result = $ulid->getDateFromUlid('01E475VQGHNW990PVHXFDT4C6W');
+        $this->assertEquals('2020-03-24 21:06:04', $result);
+    }
+
+    /**
+     * @covers Ulid\Ulid::getDateFromUlid
+     */
+    public function testGetDateFromUlidInvalid()
+    {
+        $ulid = new Ulid();
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid format ULID string.');
+        $ulid->getDateFromUlid('1585083964');
     }
 
     /**
@@ -74,7 +95,7 @@ class UlidTest extends TestCase
         $ulid = new Ulid();
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid format ULID string.');
-        $ulid->getRandomnessFromString('1585083964945');
+        $ulid->getRandomnessFromString('1585083964');
     }
 
     /**
@@ -153,7 +174,7 @@ class UlidTest extends TestCase
         $ulid = new Ulid();
         $result = $ulid->decodeTime('01E475VQGH');
         $this->assertInternalType('int', $result);
-        $this->assertEquals('1585083964945', $result);
+        $this->assertEquals('1585083964', $result);
     }
 
     /**
